@@ -7,12 +7,22 @@
     <script type="text/javascript" src="../lib/jquery-flapjax.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            jQuery('input#formInput');
+            var console = jQuery('#console');
+            var logFn = function (value) {
+                console.val(value);
+                // we return a value so the log function can simply be mapped on an EventStream to
+                // inspect the values
+                return value;
+            };
+
+            jQuery('input#formInput')
+            .fj('extValE')
+            .mapE(logFn);
         });
     </script>
 </head>
 <body>
-<input id="formInput" type="text" />
+<input id="formInput" type="text" /><br />
 <textarea id="console" cols="30" rows="10"></textarea>
 </body>
 </html>
