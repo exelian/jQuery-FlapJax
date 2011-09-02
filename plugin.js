@@ -50,28 +50,6 @@
 
             return eventStream;
         },
-        'jQueryE': function (eventStream, fnName) {
-            if (!(this instanceof $)) {
-                throw new TypeError('$obj needs to be a jQuery obj');// Type Guard
-            }
-            if (!(eventStream instanceof flapjax.EventStream)) {
-                throw new TypeError('$obj needs to be a flapjax eventstream');// Type Guard
-            }
-
-            var self = this;
-
-            eventStream.mapE(function ($obj) {
-                var i;
-                for (i = 0; i < self.length; i += 1) {
-                    var elm = self[i];
-                    var applyFn = $obj instanceof Array ? 'apply' : 'call';
-
-                    $(elm)[fnName][applyFn](elm, $obj);
-                }
-            });
-
-            return this;
-        },
         'liftB': function (fn) {
             if (!(this instanceof $) || this.length < 1) { return; }
             return this.fj('extValB').liftB(fn);
